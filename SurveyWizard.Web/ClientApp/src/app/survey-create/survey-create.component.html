@@ -1,0 +1,64 @@
+<h1>
+  Create Survey
+</h1>
+<fieldset>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="title">Title</label>
+        <input id="title" type="text" class="form-control" [(ngModel)]="model.title" [readOnly]="saving"
+               placeholder="Type in here the survey title">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-12">
+      <div class="form-group">
+        <label for="description">Description</label>
+        <input id="description" type="text" class="form-control" [(ngModel)]="model.description" [readOnly]="saving"
+               placeholder="Type in here the survey description">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <table class="table">
+      <thead>
+      <tr>
+        <th class="col-md-10">Alternatives</th>
+        <th class="col-md-2">
+          <button class="btn btn-link btn-block" (click)="add()" [disabled]="saving">Add</button>
+        </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let alternative of model.alternatives">
+        <td>
+          <input type="text" class="form-control" [(ngModel)]="alternative.value"
+                 placeholder="Type in here the alternative value" [readOnly]="saving">
+        </td>
+        <td>
+          <button class="btn btn-danger btn-block" [disabled]="model.alternatives.length === 1 || saving"
+                  (click)="remove(alternative)">
+            Remove
+          </button>
+        </td>
+      </tr>
+      </tbody>
+      <tfoot>
+      <tr>
+        <td></td>
+        <td>
+          <button class="btn btn-primary btn-block" (click)="save()" [disabled]="!valid || saving">
+            Save
+          </button>
+        </td>
+      </tr>
+      </tfoot>
+    </table>
+  </div>
+
+
+</fieldset>

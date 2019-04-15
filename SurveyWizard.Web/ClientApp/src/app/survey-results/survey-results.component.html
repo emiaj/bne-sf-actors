@@ -1,0 +1,44 @@
+<h1>
+  {{model && model.title}}
+</h1>
+<p [class.d-none]="!loading">
+  Loading survey results...
+</p>
+<div *ngIf="model">
+  <p class="lead">
+    {{model.description}}
+  </p>
+  <div class="row">
+    <div class="col-md-12 mt-3" *ngFor="let result  of model.results | keyvalue" role="progressbar">
+      <div class="row">
+        <div class="col-md-3">
+          {{result.key}} ({{result.value}} votes)
+        </div>
+        <div class="col-md-9">
+          <div class="progress">
+            <div *ngIf="total > 0"
+                 class="progress-bar"
+                 role="progressbar"
+                 [style.width]="(result.value/total*100) + '%'"
+                 [attr.aria-valuenow]="result.value/total*100"
+                 aria-valuemin="0"
+                 aria-valuemax="100"
+                 [attr.title]="(result.value/total*100).toFixed(0) + '%'">
+            </div>
+            <div *ngIf="total === 0"
+                 class="progress-bar"
+                 role="progressbar"
+                 style="width: 0"
+                 aria-valuenow="0"
+                 aria-valuemin="0"
+                 aria-valuemax="100"
+                 title="0%">
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+

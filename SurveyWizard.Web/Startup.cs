@@ -46,7 +46,7 @@ namespace SurveyWizard.Web
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
-                    name: "default",
+                    name: "default", 
                     template: "{controller}/{action=Index}/{id?}");
             });
 
@@ -59,7 +59,8 @@ namespace SurveyWizard.Web
 
                 if (env.IsDevelopment())
                 {
-                    spa.UseAngularCliServer(npmScript: "start");
+                    spa.UseProxyToSpaDevelopmentServer("http://localhost:4200/");
+                    // spa.UseAngularCliServer(npmScript: "start");
                 }
             });
         }

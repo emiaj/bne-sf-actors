@@ -1,0 +1,49 @@
+<h1>
+  Survey List
+</h1>
+
+<table class="table">
+  <thead>
+  <tr>
+    <th class="col-md-11">
+    </th>
+    <th class="col-md-1">
+      <a class="btn btn-primary" [routerLink]='["/survey/create"]'>
+        Create
+      </a>
+    </th>
+  </tr>
+  </thead>
+  <tbody *ngIf="loading">
+  <tr>
+    <td colspan="2">
+      Loading data...
+    </td>
+  </tr>
+  </tbody>
+  <tbody *ngIf="!loading">
+  <tr *ngFor="let item of items">
+    <td>
+      <a [routerLink]='["/survey/view/", item.id]' class="lead">
+        {{item.title}}
+      </a>
+      <p class="lead">
+        <small>
+          {{item.description}}
+        </small>
+      </p>
+    </td>
+    <td>
+      <button class="btn btn-danger" (click)="remove(item.id)">
+        Remove
+      </button>
+    </td>
+  </tr>
+  <tr *ngIf="!items || items.length === 0">
+    <td colspan="2">
+      No surveys have been found, you can create one by clicking the "Create" button above
+    </td>
+  </tr>
+  </tbody>
+</table>
+

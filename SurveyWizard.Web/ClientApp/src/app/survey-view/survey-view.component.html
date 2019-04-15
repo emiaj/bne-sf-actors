@@ -1,0 +1,39 @@
+<div class="card">
+  <div class="card-header">
+    {{model && model.title}}
+  </div>
+  <div class="card-body">
+    <div *ngIf="model">
+      <p class="lead">
+        {{model.description}}
+      </p>
+
+      <div [class.d-none]="mode!==1">
+        <ul class="list-group">
+          <li [class.active]="alternative == model.vote" class="list-group-item"
+              *ngFor="let alternative of model.alternatives">
+            <a (click)="model.vote = alternative">
+              {{alternative.value}}
+            </a>
+          </li>
+        </ul>
+
+        <button class="btn btn-primary" (click)="submit()">Submit vote</button>
+        <a class="btn btn-link" [routerLink]='["/survey/results/", model.id ]'>View results</a>
+      </div>
+
+      <div [class.d-none]="mode!==2">
+        <p>
+          <strong>
+            Your vote has been recorded!
+          </strong>
+        </p>
+        <a class="btn btn-link" [routerLink]='["/survey/results/", model.id ]'>View results</a>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+

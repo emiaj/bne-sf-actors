@@ -1,16 +1,18 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<ApplicationManifest ApplicationTypeName="SurveyWizardType"
-                     ApplicationTypeVersion="1.0.0"
-                     xmlns="http://schemas.microsoft.com/2011/01/fabric"
-                     xmlns:xsd="http://www.w3.org/2001/XMLSchema"
-                     xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<ApplicationManifest xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ApplicationTypeName="SurveyWizardType" ApplicationTypeVersion="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
   <Parameters>
     <Parameter Name="SurveyWizard.Web_ASPNETCORE_ENVIRONMENT" DefaultValue="" />
     <Parameter Name="SurveyWizard.Web_InstanceCount" DefaultValue="-1" />
+    <Parameter Name="SurveyActorService_PartitionCount" DefaultValue="10" />
+    <Parameter Name="SurveyActorService_MinReplicaSetSize" DefaultValue="1" />
+    <Parameter Name="SurveyActorService_TargetReplicaSetSize" DefaultValue="1" />
   </Parameters>
   <!-- Import the ServiceManifest from the ServicePackage. The ServiceManifestName and ServiceManifestVersion 
        should match the Name and Version attributes of the ServiceManifest element defined in the 
        ServiceManifest.xml file. -->
+  <ServiceManifestImport>
+    <ServiceManifestRef ServiceManifestName="SurveyWizard.ActorSystemPkg" ServiceManifestVersion="1.0.0" />
+  </ServiceManifestImport>
   <ServiceManifestImport>
     <ServiceManifestRef ServiceManifestName="SurveyWizard.WebPkg" ServiceManifestVersion="1.0.0" />
     <ConfigOverrides />
@@ -28,6 +30,11 @@
       <StatelessService ServiceTypeName="SurveyWizard.WebType" InstanceCount="[SurveyWizard.Web_InstanceCount]">
         <SingletonPartition />
       </StatelessService>
+    </Service>
+    <Service Name="SurveyActorService" GeneratedIdRef="ea5a3401-8e0b-4e26-b417-a76ceeaca6be|None">
+      <StatefulService ServiceTypeName="SurveyActorServiceType" TargetReplicaSetSize="[SurveyActorService_TargetReplicaSetSize]" MinReplicaSetSize="[SurveyActorService_MinReplicaSetSize]">
+        <UniformInt64Partition PartitionCount="[SurveyActorService_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
+      </StatefulService>
     </Service>
   </DefaultServices>
 </ApplicationManifest>

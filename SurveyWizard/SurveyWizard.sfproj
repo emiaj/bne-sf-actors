@@ -32,6 +32,7 @@
     <Content Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\SurveyWizard.ActorSystem\SurveyWizard.ActorSystem.csproj" />
     <ProjectReference Include="..\SurveyWizard.Web\SurveyWizard.Web.csproj" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.Common.targets" />

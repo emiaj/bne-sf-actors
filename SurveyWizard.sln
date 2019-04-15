@@ -7,6 +7,10 @@ Project("{A07B5EB6-E848-4116-A8D0-A826331D98C6}") = "SurveyWizard", "SurveyWizar
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyWizard.Web", "SurveyWizard.Web\SurveyWizard.Web.csproj", "{EB308434-2831-47FF-A246-A0FE1B681FD5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyWizard.ActorSystem", "SurveyWizard.ActorSystem\SurveyWizard.ActorSystem.csproj", "{51B94391-5328-4433-9C97-35FC10266A0B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SurveyWizard.ActorSystem.Interfaces", "SurveyWizard.ActorSystem.Interfaces\SurveyWizard.ActorSystem.Interfaces.csproj", "{C71FCE25-852B-4804-89D4-AA795C1D8A84}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +35,22 @@ Global
 		{EB308434-2831-47FF-A246-A0FE1B681FD5}.Release|Any CPU.Build.0 = Release|Any CPU
 		{EB308434-2831-47FF-A246-A0FE1B681FD5}.Release|x64.ActiveCfg = Release|Any CPU
 		{EB308434-2831-47FF-A246-A0FE1B681FD5}.Release|x64.Build.0 = Release|Any CPU
+		{51B94391-5328-4433-9C97-35FC10266A0B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{51B94391-5328-4433-9C97-35FC10266A0B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{51B94391-5328-4433-9C97-35FC10266A0B}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{51B94391-5328-4433-9C97-35FC10266A0B}.Debug|x64.Build.0 = Debug|Any CPU
+		{51B94391-5328-4433-9C97-35FC10266A0B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{51B94391-5328-4433-9C97-35FC10266A0B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{51B94391-5328-4433-9C97-35FC10266A0B}.Release|x64.ActiveCfg = Release|Any CPU
+		{51B94391-5328-4433-9C97-35FC10266A0B}.Release|x64.Build.0 = Release|Any CPU
+		{C71FCE25-852B-4804-89D4-AA795C1D8A84}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C71FCE25-852B-4804-89D4-AA795C1D8A84}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C71FCE25-852B-4804-89D4-AA795C1D8A84}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{C71FCE25-852B-4804-89D4-AA795C1D8A84}.Debug|x64.Build.0 = Debug|Any CPU
+		{C71FCE25-852B-4804-89D4-AA795C1D8A84}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C71FCE25-852B-4804-89D4-AA795C1D8A84}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C71FCE25-852B-4804-89D4-AA795C1D8A84}.Release|x64.ActiveCfg = Release|Any CPU
+		{C71FCE25-852B-4804-89D4-AA795C1D8A84}.Release|x64.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
