@@ -37,13 +37,12 @@ namespace SurveyWizard.Web.Controllers
 
                     var key = (Int64RangePartitionInformation) partition.PartitionInformation;
 
-                    var actorServiceProxy =
-                        ServiceProxy.Create<IActorService>(serviceName, new ServicePartitionKey(key.LowKey));
+                    var actorServiceProxy = ServiceProxy.Create<IActorService>(serviceName, new ServicePartitionKey(key.LowKey));
                     ContinuationToken continuationToken = null;
                     do
                     {
                         var page = await actorServiceProxy.GetActorsAsync(continuationToken, cancellationToken);
-                        activeActors.AddRange(page.Items.Where(x => x.IsActive));
+                        activeActors.AddRange(page.Items);
 
                         continuationToken = page.ContinuationToken;
                     } while (continuationToken != null && activeActors.Count < 10);
@@ -57,6 +56,10 @@ namespace SurveyWizard.Web.Controllers
                     try
                     {
                         var details = await surveyActor.GetDetails(cancellationToken);
+                        if (details == null)
+                        {
+                            continue;
+                        }
                         surveys.Add(new SurveySummaryModel
                         {
                             Id = actorInformation.ActorId.GetGuidId(),
