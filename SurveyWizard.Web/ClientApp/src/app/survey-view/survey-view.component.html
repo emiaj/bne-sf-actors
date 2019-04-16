@@ -10,7 +10,7 @@
 
       <div [class.d-none]="mode!==1">
         <ul class="list-group mb-4">
-          <li [class.active]="alternative == model.vote" class="list-group-item"
+          <li [class.active]="alternative == model.vote" class="list-group-item" (click)="model.vote = alternative"
               *ngFor="let alternative of model.alternatives">
             <a (click)="model.vote = alternative">
               {{alternative.value}}
