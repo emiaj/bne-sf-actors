@@ -25,7 +25,7 @@ export class SurveyListComponent implements OnInit {
   }
 
   async remove(id: string) {
-    await this.http.delete(this.baseUrl + 'api/survey/' + id);
+    await this.http.delete(this.baseUrl + 'api/survey/' + id).toPromise();
     await this.load();
   }
 
