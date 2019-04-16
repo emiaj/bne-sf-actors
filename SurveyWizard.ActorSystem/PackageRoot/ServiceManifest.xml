@@ -1,9 +1,9 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <ServiceManifest xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" Name="SurveyWizard.ActorSystemPkg" Version="1.0.0" xmlns="http://schemas.microsoft.com/2011/01/fabric">
   <ServiceTypes>
-    <StatefulServiceType ServiceTypeName="SurveyActorServiceType">
+    <StatefulServiceType ServiceTypeName="SurveyActorServiceType" HasPersistedState="true">
       <Extensions>
-        <Extension Name="__GeneratedServiceType__" GeneratedId="ea5a3401-8e0b-4e26-b417-a76ceeaca6be|None">
+        <Extension Name="__GeneratedServiceType__" GeneratedId="205a6768-ecc9-41b8-a750-9cc99b706e4e|Persisted">
           <GeneratedNames xmlns="http://schemas.microsoft.com/2015/03/fabact-no-schema">
             <DefaultService Name="SurveyActorService" />
             <ReplicatorEndpoint Name="SurveyActorServiceReplicatorEndpoint" />

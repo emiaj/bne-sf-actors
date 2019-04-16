@@ -8,6 +8,7 @@ using SurveyWizard.ActorSystem.Interfaces;
 
 namespace SurveyWizard.ActorSystem
 {
+    [StatePersistence(StatePersistence.Persisted)]
     public class SurveyActor : Actor, ISurveyActor
     {
         public SurveyActor(ActorService actorService, ActorId actorId) : base(actorService, actorId)

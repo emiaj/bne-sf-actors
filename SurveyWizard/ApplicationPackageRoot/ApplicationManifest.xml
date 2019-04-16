@@ -4,8 +4,8 @@
     <Parameter Name="SurveyWizard.Web_ASPNETCORE_ENVIRONMENT" DefaultValue="" />
     <Parameter Name="SurveyWizard.Web_InstanceCount" DefaultValue="-1" />
     <Parameter Name="SurveyActorService_PartitionCount" DefaultValue="10" />
-    <Parameter Name="SurveyActorService_MinReplicaSetSize" DefaultValue="1" />
-    <Parameter Name="SurveyActorService_TargetReplicaSetSize" DefaultValue="1" />
+    <Parameter Name="SurveyActorService_MinReplicaSetSize" DefaultValue="3" />
+    <Parameter Name="SurveyActorService_TargetReplicaSetSize" DefaultValue="3" />
   </Parameters>
   <!-- Import the ServiceManifest from the ServicePackage. The ServiceManifestName and ServiceManifestVersion 
        should match the Name and Version attributes of the ServiceManifest element defined in the 
@@ -31,7 +31,7 @@
         <SingletonPartition />
       </StatelessService>
     </Service>
-    <Service Name="SurveyActorService" GeneratedIdRef="ea5a3401-8e0b-4e26-b417-a76ceeaca6be|None">
+    <Service Name="SurveyActorService" GeneratedIdRef="205a6768-ecc9-41b8-a750-9cc99b706e4e|Persisted">
       <StatefulService ServiceTypeName="SurveyActorServiceType" TargetReplicaSetSize="[SurveyActorService_TargetReplicaSetSize]" MinReplicaSetSize="[SurveyActorService_MinReplicaSetSize]">
         <UniformInt64Partition PartitionCount="[SurveyActorService_PartitionCount]" LowKey="-9223372036854775808" HighKey="9223372036854775807" />
       </StatefulService>
