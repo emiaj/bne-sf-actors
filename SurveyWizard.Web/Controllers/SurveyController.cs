@@ -11,9 +11,10 @@ namespace SurveyWizard.Web.Controllers
     {
         [Route("[action]")]
         [HttpGet]
-        public async Task List(CancellationToken cancellationToken)
+        public async Task<SurveySummary[]> List(CancellationToken cancellationToken)
         {
             await Task.CompletedTask;
+            return new SurveySummary[0];
         }
 
         [Route("")]
@@ -71,6 +72,14 @@ namespace SurveyWizard.Web.Controllers
         public string Description { get; set; }
         public AlternativeModel[] Alternatives { get; set; }
     }
+
+    public class SurveySummary
+    {
+        public Guid Id { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+    }
+
 
     public class SurveyDetails
     {
