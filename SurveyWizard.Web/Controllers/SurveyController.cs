@@ -11,10 +11,10 @@ namespace SurveyWizard.Web.Controllers
     {
         [Route("[action]")]
         [HttpGet]
-        public async Task<SurveySummary[]> List(CancellationToken cancellationToken)
+        public async Task<SurveySummaryModel[]> List(CancellationToken cancellationToken)
         {
             await Task.CompletedTask;
-            return new SurveySummary[0];
+            return new SurveySummaryModel[0];
         }
 
         [Route("")]
@@ -27,10 +27,10 @@ namespace SurveyWizard.Web.Controllers
 
         [Route("{id}")]
         [HttpGet]
-        public async Task<SurveyDetails> Details(Guid id, CancellationToken cancellationToken)
+        public async Task<SurveyDetailsModel> Details(Guid id, CancellationToken cancellationToken)
         {
             await Task.CompletedTask;
-            return new SurveyDetails();
+            return new SurveyDetailsModel();
         }
 
         [Route("{id}")]
@@ -42,17 +42,17 @@ namespace SurveyWizard.Web.Controllers
 
         [Route("{id}/[action]")]
         [HttpPost]
-        public async Task Vote(Guid id, CancellationToken cancellationToken)
+        public async Task Vote(Guid id, [FromBody] VoteModel request, CancellationToken cancellationToken)
         {
             await Task.CompletedTask;
         }
 
         [Route("{id}/results")]
         [HttpGet]
-        public async Task<SurveyResults> Results(Guid id, CancellationToken cancellationToken)
+        public async Task<SurveyResultsModel> Results(Guid id, CancellationToken cancellationToken)
         {
             await Task.CompletedTask;
-            return new SurveyResults();
+            return new SurveyResultsModel();
         }
     }
 
@@ -73,7 +73,14 @@ namespace SurveyWizard.Web.Controllers
         public AlternativeModel[] Alternatives { get; set; }
     }
 
-    public class SurveySummary
+    public class VoteModel
+    {
+        public Guid Id { get; set; }
+        public AlternativeModel Vote { get; set; }
+    }
+
+
+    public class SurveySummaryModel
     {
         public Guid Id { get; set; }
         public string Title { get; set; }
@@ -81,9 +88,9 @@ namespace SurveyWizard.Web.Controllers
     }
 
 
-    public class SurveyDetails
+    public class SurveyDetailsModel
     {
-        public SurveyDetails()
+        public SurveyDetailsModel()
         {
             Alternatives = new AlternativeModel[0];
         }
@@ -94,9 +101,9 @@ namespace SurveyWizard.Web.Controllers
         public AlternativeModel[] Alternatives { get; set; }
     }
 
-    public class SurveyResults
+    public class SurveyResultsModel
     {
-        public SurveyResults()
+        public SurveyResultsModel()
         {
             Results = new Dictionary<string, int>();
         }
