@@ -16,49 +16,63 @@ namespace SurveyWizard.ActorSystem
 
         public async Task UpdateDetails(string title, string description, string[] alternatives, CancellationToken cancellationToken)
         {
-            await StateManager.TryAddStateAsync(nameof(SurveyState), new SurveyState
+            var state = new SurveyState
             {
                 Alternatives = alternatives,
                 Votes = new List<string>(),
                 Description = description,
                 Title = title
-            }, cancellationToken);
+            };
+            await StateManager.AddOrUpdateStateAsync(nameof(SurveyState), state, (key, current) => state, cancellationToken);
         }
 
         public async Task RegisterVote(string alternative, CancellationToken cancellationToken)
         {
-            var state = await StateManager.GetStateAsync<SurveyState>(nameof(SurveyState), cancellationToken);
-            if (state.Alternatives.Any(a => a == alternative))
+            var state = await StateManager.TryGetStateAsync<SurveyState>(nameof(SurveyState), cancellationToken);
+            if (state.HasValue)
             {
-                state.Votes.Add(alternative);
+                if (state.Value.Alternatives.Any(a => a == alternative))
+                {
+                    state.Value.Votes.Add(alternative);
+                }
+                await StateManager.AddOrUpdateStateAsync(nameof(SurveyState), state.Value, (key, current) => state.Value, cancellationToken);
             }
-            await StateManager.AddOrUpdateStateAsync(nameof(SurveyState), state, (key, current) => state, cancellationToken);
         }
 
         public async Task<SurveyResults> GetResults(CancellationToken cancellationToken)
         {
-            var state = await StateManager.GetStateAsync<SurveyState>(nameof(SurveyState), cancellationToken);
-            var results = new SurveyResults
+            var state = await StateManager.TryGetStateAsync<SurveyState>(nameof(SurveyState), cancellationToken);
+            if (state.HasValue)
             {
-                Title = state.Title,
-                Description = state.Description,
-                Results = state.Alternatives.ToDictionary(
-                    alternative => alternative,
-                    alternative => state.Votes.Count(vote => vote == alternative))
-            };
-            return results;
+                var results = new SurveyResults
+                {
+                    Title = state.Value.Title,
+                    Description = state.Value.Description,
+                    Results = state.Value.Alternatives.ToDictionary(
+                        alternative => alternative,
+                        alternative => state.Value.Votes.Count(vote => vote == alternative))
+                };
+                return results;
+            }
+
+            return null;
+
         }
 
         public async Task<SurveyDetails> GetDetails(CancellationToken cancellationToken)
         {
-            var state = await StateManager.GetStateAsync<SurveyState>(nameof(SurveyState), cancellationToken);
-
-            return new SurveyDetails
+            var state = await StateManager.TryGetStateAsync<SurveyState>(nameof(SurveyState), cancellationToken);
+            if (state.HasValue)
             {
-                Alternatives = state.Alternatives,
-                Description = state.Description,
-                Title = state.Title
-            };
+                return new SurveyDetails
+                {
+                    Alternatives = state.Value.Alternatives,
+                    Description = state.Value.Description,
+                    Title = state.Value.Title
+                };
+            }
+
+            return null;
         }
     }
 
