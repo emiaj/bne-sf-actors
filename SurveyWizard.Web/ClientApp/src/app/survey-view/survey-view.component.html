@@ -9,7 +9,7 @@
       </p>
 
       <div [class.d-none]="mode!==1">
-        <ul class="list-group">
+        <ul class="list-group mb-4">
           <li [class.active]="alternative == model.vote" class="list-group-item"
               *ngFor="let alternative of model.alternatives">
             <a (click)="model.vote = alternative">
@@ -18,7 +18,7 @@
           </li>
         </ul>
 
-        <button class="btn btn-primary" (click)="submit()">Submit vote</button>
+        <button [disabled]="!model.vote" class="btn btn-primary" (click)="submit()">Submit vote</button>
         <a class="btn btn-link" [routerLink]='["/survey/results/", model.id ]'>View results</a>
       </div>
 

@@ -26,7 +26,7 @@ export class SurveyViewComponent implements OnInit {
   async submit() {
     this.mode = 2;
     const id = this.route.snapshot.paramMap.get('id');
-    await this.http.post(this.baseUrl + 'api/survey/' + id + '/vote', this.mode);
+    await this.http.post(this.baseUrl + 'api/survey/' + id + '/vote', this.model).toPromise();
   }
 
 
